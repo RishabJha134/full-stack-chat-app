@@ -15,11 +15,11 @@ const useSendMessages = () => {
           withCredentials: true,
         }
       );
-      console.log("Message sent:", response.data);
+      // console.log("Message sent:", response.data);
       setMessages([...messages, response.data]);
       setLoading(false);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setLoading(false);
     }
   };

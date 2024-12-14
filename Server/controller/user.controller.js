@@ -30,8 +30,8 @@ const signup = async (req, res) => {
 
     await user.save();
 
-    console.log("user created successfully: " + user);
-    console.log(process.env.JWT_SECRET);
+    // console.log("user created successfully: " + user);
+    // console.log(process.env.JWT_SECRET);
 
     const token = jwt.sign(
       {
@@ -44,7 +44,7 @@ const signup = async (req, res) => {
       }
     );
 
-    console.log("token: ", token);
+    // console.log("token: ", token);
 
     res.cookie("jwt", token, {
       httpOnly: true, // prevent from xxs attack
@@ -77,7 +77,7 @@ const login = async (req, res) => {
 
     const loginWalaPassword = password;
     const isMatch = await bcrypt.compare(loginWalaPassword, user.password);
-    console.log("isMatch" + isMatch);
+    // console.log("isMatch" + isMatch);
     if (!isMatch) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
@@ -93,7 +93,7 @@ const login = async (req, res) => {
       }
     );
 
-    console.log("token: ", token);
+    // console.log("token: ", token);
 
     res.cookie("jwt", token, {
       httpOnly: true, // prevent from xxs attack
@@ -134,13 +134,13 @@ const logout = async (req, res) => {
 
 const allUsers = async (req, res) => {
   try {
-    console.log("req.user -> " + req.user);
+    // console.log("req.user -> " + req.user);
     const loggedInUserId = req.user._id;
     const filteredUsers = await User.find({
       _id: { $ne: loggedInUserId },
     }).select(["-password", "-confirmPassword"]);
 
-    console.log("allUsers -> " + filteredUsers);
+    // console.log("allUsers -> " + filteredUsers);
     res.status(200).json({ data: filteredUsers }); // or return a paginated response here. You can add a query parameter for page number and limit.   // also, remember to add proper error handling for different types of errors. For instance, if the database is down.   // You can also add a rate limiting system to handle too many requests.   //
   } catch (err) {
     console.error(err);

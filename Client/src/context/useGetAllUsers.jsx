@@ -11,7 +11,7 @@ const useGetAllUsers = () => {
       setLoading(true);
       try {
         const token = Cookies.get("jwt");
-        console.log(token);
+        // console.log(token);
         const response = await axios.get(
           "http://localhost:5000/api/v1/users/allUsers",
           {
@@ -19,7 +19,7 @@ const useGetAllUsers = () => {
           }
         );
 
-        console.log("response:" + JSON.stringify(response.data.data));
+        // console.log("response:" + JSON.stringify(response.data.data));
 
         setAllUsers(response.data.data);
         setLoading(false);

@@ -10,7 +10,7 @@ const Logout = () => {
   const [loading, setLoading] = useState(false);
 
   async function handleLogout() {
-    console.log("Logging out...");
+    // console.log("Logging out...");
     setLoading(true);
     
     try {
@@ -20,7 +20,7 @@ const Logout = () => {
         { withCredentials: true }
       );
   
-      console.log("Logout response:", response.data);
+      // console.log("Logout response:", response.data);
   
       // Clear local storage
       localStorage.removeItem("ChatApp");
@@ -29,9 +29,9 @@ const Logout = () => {
       // alert("Logged out successfully")
       window.location.reload();
   
-      console.log("Navigating to login...");
+      // console.log("Navigating to login...");
       // navigate("/login");
-      console.log("Navigation triggered.");
+      // console.log("Navigation triggered.");
   
       setLoading(false);
     } catch (err) {

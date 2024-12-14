@@ -11,8 +11,8 @@ import useConversation from "./zustand/useConversation";
 function App() {
   const [authUser, setAuthUser] = useAuth();
   const { selectedConversation, setSelectedConversation } = useConversation();
-  console.log("setSelectedConversation" + JSON.stringify(selectedConversation));
-  console.log(authUser);
+  // console.log("setSelectedConversation" + JSON.stringify(selectedConversation));
+  // console.log(authUser);
   return (
     <>
       <Routes>

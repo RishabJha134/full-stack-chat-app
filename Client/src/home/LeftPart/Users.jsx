@@ -4,7 +4,7 @@ import useGetAllUsers from "../../context/useGetAllUsers";
 
 const Users = () => {
   const [allUsers, loading] = useGetAllUsers();
-  console.log(JSON.stringify(allUsers));
+  // console.log(JSON.stringify(allUsers));
   return (
     <div>
       <h1 className="px-8 py-2 text-white font-semibold bg-slate-800 rounded-md">

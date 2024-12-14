@@ -21,7 +21,7 @@ const useGetMessage = () => {
           setMessages(response.data);
           setLoading(false);
         } catch (error) {
-          console.log("error fetching messages", error);
+          // console.log("error fetching messages", error);
           setLoading(false);
         }
       }

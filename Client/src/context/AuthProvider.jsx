@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     initialUserState ? JSON.parse(initialUserState) : undefined
   );
 
-  console.log("authUser " + authUser);
+  // console.log("authUser " + authUser);
 
   return (
     <AuthContext.Provider value={[authUser, setAuthUser]}>

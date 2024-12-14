@@ -1,11 +1,24 @@
-import React from "react";
-import Message from "./Message";
-import useGetMessage from "../../context/useGetMessage";
-import Loading from "./../../components/Loading";
+import React, { useEffect, useRef } from "react";
+import useGetMessage from './../../context/useGetMessage';
+import useGetSocketMessage from './../../context/useGetSocketMessage';
+import Loading from './../../components/Loading';
+import  Message  from "../RightPart/Message";
 
-const Messages = () => {
+function Messages() {
   const { loading, messages } = useGetMessage();
-  console.log(messages);
+  useGetSocketMessage(); // listing incoming messages
+  // console.log(messages);
+
+  const lastMsgRef = useRef();
+  useEffect(() => {
+    setTimeout(() => {
+      if (lastMsgRef.current) {
+        lastMsgRef.current.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    }, 100);
+  }, [messages]);
   return (
     <div
       className="flex-1 overflow-y-auto"
@@ -15,9 +28,11 @@ const Messages = () => {
         <Loading />
       ) : (
         messages.length > 0 &&
-        messages.map((item) => {
-          return <Message key={item._id} message={item}></Message>;
-        })
+        messages.map((message) => (
+          <div key={message._id} ref={lastMsgRef}>
+            <Message message={message} />
+          </div>
+        ))
       )}
 
       {!loading && messages.length === 0 && (
@@ -29,6 +44,6 @@ const Messages = () => {
       )}
     </div>
   );
-};
+}
 
 export default Messages;

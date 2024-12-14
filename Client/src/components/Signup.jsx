@@ -22,7 +22,7 @@ function Signup() {
   };
 
   const onSubmit = async (data) => {
-    console.log("form ka saara data track by react hook form: " + JSON.stringify(data));
+    // console.log("form ka saara data track by react hook form: " + JSON.stringify(data));
     const userInfo = {
       fullname: data.fullname,
       email: data.email,
@@ -40,7 +40,7 @@ function Signup() {
         if (response.data) {
           toast.success("Signup successful");
         }
-        console.log("signup successful:" + JSON.stringify(response.data));
+        // console.log("signup successful:" + JSON.stringify(response.data));
         localStorage.setItem("ChatApp", JSON.stringify(response.data));
         setAuthUser(response.data);
       })

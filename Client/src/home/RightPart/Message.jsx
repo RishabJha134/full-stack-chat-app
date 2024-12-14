@@ -3,8 +3,8 @@ import React from "react";
 const Message = ({ message }) => {
   const authUser = JSON.parse(localStorage.getItem("ChatApp"));
 
-  console.log("message:" + JSON.stringify(message));
-  console.log("authUser:" + JSON.stringify(authUser));
+  // console.log("message:" + JSON.stringify(message));
+  // console.log("authUser:" + JSON.stringify(authUser));
 
   // check is this message to send by me.
   const itsMe = message?.senderId === authUser.data._id;

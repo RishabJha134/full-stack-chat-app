@@ -1,5 +1,6 @@
 const { Conversation } = require("../model/conversation.model");
 const { Message } = require("../model/message.model");
+const { getRecieverSocketId, io } = require("../socketIO/server");
 async function sendMessage(req, res) {
   try {
     // Extract message from the request body and receiver ID from params
@@ -26,8 +27,8 @@ async function sendMessage(req, res) {
       message,
     });
 
-    console.log("Conversation:", conversation);
-    console.log("New Message:", newMessage);
+    // console.log("Conversation:", conversation);
+    // console.log("New Message:", newMessage);
 
     // Link the new message to the conversation
     if (newMessage) {
@@ -38,11 +39,19 @@ async function sendMessage(req, res) {
     // Save the conversation and message concurrently for efficiency
     await Promise.all([conversation.save(), newMessage.save()]);
 
+    console.log("receiverId" + receiverId);
+
+    const recieverSocketId = getRecieverSocketId(receiverId);
+    console.log("recieverSocketId" + recieverSocketId);
+    if (recieverSocketId) {
+      // particular usi reciever ke pass message jayega jiska recieverSocketId hai yeh.
+      // aur message tabhi jayega jab reciever online hoga aur tabhi us receiver ka recieverSocketId bhi defined hoga.
+      // io.to is used to send the message to the particular reciever not all.
+      io.to(recieverSocketId).emit("newMessage", newMessage);
+    }
+
     // Respond with success and the new message
-    res.status(200).json({
-      message: "Message sent successfully",
-      newMessage,
-    });
+    res.status(201).json(newMessage);
 
     // Notes:
     // If no conversation exists, a new one is created.
@@ -61,12 +70,12 @@ const getMessages = async (req, res) => {
     // Find the conversation between the senderId and chatUser and then populate their messages:-
 
     // senderId and recieverId/chatUser ke beech ki jitne bhi conversation or messages hai vo saara ek array ke form me return karwana hai hume so that we can map their all messages in the ui.
-    
+
     let conversation = await Conversation.findOne({
       members: { $all: [senderId, charUser] },
     }).populate("messages");
 
-    console.log("conversation:" + conversation);
+    // console.log("conversation:" + conversation);
 
     if (!conversation) {
       return res.status(201).json([]);

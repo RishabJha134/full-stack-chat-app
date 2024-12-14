@@ -11,7 +11,7 @@ const auth = async (req, res, next) => {
     if (!decodedUser) {
       return res.status(401).json({ msg: "Token is invalid" });
     }
-    console.log("decodedUser -> " + decodedUser);
+    // console.log("decodedUser -> " + decodedUser);
 
     const user = await User.findById(decodedUser.userId).select(["-password","-confirmPassword"]);
     if (!user) {

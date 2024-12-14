@@ -4,7 +4,7 @@ const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 dotenv.config();
-import { app,server } from "./socketIO/server";
+const { app, server } = require("./socketIO/server");
 
 // const app = express();
 const PORT = process.env.PORT || 3000;
