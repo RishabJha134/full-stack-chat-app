@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 const useConversation = create((set) => ({
+  
   // Initial state
   selectedConversation: null,
   messages: [],
@@ -12,8 +13,11 @@ const useConversation = create((set) => ({
 
   // Function to update messages
   setMessages: (data) => {
+    // console.log(data);
     set({ messages: data });
+    
   },
 }));
+
 
 export default useConversation;

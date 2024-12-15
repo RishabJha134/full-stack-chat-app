@@ -7,7 +7,7 @@ const Message = ({ message }) => {
   // console.log("authUser:" + JSON.stringify(authUser));
 
   // check is this message to send by me.
-  const itsMe = message?.senderId === authUser.data._id;
+  const itsMe = message?.senderId === authUser?.data?._id;
 
   const chatName = itsMe ? "chat-end" : "chat-start";
   const chatColor = itsMe ? "bg-blue-500" : "";

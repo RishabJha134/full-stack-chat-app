@@ -3,6 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import useGetAllUsers from "../../context/useGetAllUsers";
 import useConversation from "../../zustand/useConversation";
 import toast from "react-hot-toast";
+import { CiMenuFries } from 'react-icons/ci';
 function Search() {
   const [search, setSearch] = useState("");
   const [allUsers] = useGetAllUsers();
@@ -24,8 +25,16 @@ function Search() {
   return (
     <div className=" h-[10vh]">
       <div className="px-6 py-4">
-        <form onSubmit={handleSubmit}>
-          <div className="flex space-x-3">
+        <form className="" onSubmit={handleSubmit}>
+          <div className="flex space-x-3  ml-5  mt-[-14px] lg:ml-0 lg:mt-[0px]">
+
+            <label
+              htmlFor="my-drawer-2"
+              className="btn btn-ghost drawer-button lg:hidden absolute left-[-5px] lg:left-0"
+            >
+              <CiMenuFries className="text-white text-xl" />
+            </label>
+
             <label className=" border-[1px] border-gray-700 bg-slate-900 rounded-lg p-3 flex items-center gap-2 w-[80%]">
               <input
                 type="text"

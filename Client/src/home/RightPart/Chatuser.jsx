@@ -4,14 +4,16 @@ import React from "react";
 import { CiMenuFries } from "react-icons/ci";
 
 // import profile from "../../../public/user.jpg"; // getting photo from public folder.
-import useConversation from './../../zustand/useConversation';
-import { useSocketContextData } from './../../context/SocketContext';
+import useConversation from "./../../zustand/useConversation";
+import { useSocketContextData } from "./../../context/SocketContext";
 
 function Chatuser() {
   const { selectedConversation } = useConversation();
   const { onlineUsers } = useSocketContextData();
   const getOnlineUsersStatus = (userId) => {
-    return onlineUsers.includes(userId) ? "Online" : "Offline";
+    const result = onlineUsers.includes(userId) ? "Online" : "Offline";
+    console.log("result: " + result);
+    return result;
   };
 
   // console.log(selectedConversation.fullname);
@@ -24,9 +26,19 @@ function Chatuser() {
         <CiMenuFries className="text-white text-xl" />
       </label>
       <div className="flex space-x-3 items-center justify-center h-[8vh] bg-gray-800 hover:bg-gray-700 duration-300">
-        <div className="avatar online">
+        <div
+          className={`avatar ${
+            getOnlineUsersStatus(selectedConversation._id)==="Online"
+              ? "online"
+              : "offline"
+          }`}
+        >
           <div className="w-16 rounded-full">
-            <img src={"https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} />
+            <img
+              src={
+                "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+              }
+            />
           </div>
         </div>
         <div>

@@ -18,6 +18,8 @@ const useGetMessage = () => {
             }
           );
 
+          console.log("response"+response.data);
+
           setMessages(response.data);
           setLoading(false);
         } catch (error) {

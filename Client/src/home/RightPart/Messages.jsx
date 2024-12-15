@@ -6,8 +6,12 @@ import  Message  from "../RightPart/Message";
 
 function Messages() {
   const { loading, messages } = useGetMessage();
+  console.log("before socket messages"+ JSON.stringify(messages));
+  
   useGetSocketMessage(); // listing incoming messages
+
   // console.log(messages);
+  console.log("after socket messages" + JSON.stringify(messages));
 
   const lastMsgRef = useRef();
   useEffect(() => {

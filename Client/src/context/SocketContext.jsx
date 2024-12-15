@@ -21,7 +21,7 @@ export const SocketProvider = ({ children }) => {
           userId: authUser.data._id,
         },
       });
-      // console.log("socket", socket);
+      console.log("socket", socket);
       setSocket(socket);
       socket.on("getOnlineUsers", (users) => {
         setOnlineUsers(users);
